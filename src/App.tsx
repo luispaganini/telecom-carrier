@@ -2,14 +2,14 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import NumberTable from './components/NumberTable/NumberTable';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import HomePage from './pages/HomePage';
+
 
 const App: React.FC = () => {
   return (
     <Provider store={store}>
-      <div className="container mt-4">
-        <h2>Phone Numbers for Sale</h2>
-        <NumberTable />
-      </div>
+      <HomePage />
     </Provider>
   );
 };

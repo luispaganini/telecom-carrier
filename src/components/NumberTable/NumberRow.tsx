@@ -1,27 +1,26 @@
-import React from 'react';
-
-interface Number {
-  id: number;
-  value: string;
-  monthlyPrice: string;
-  setupPrice: string;
-  currency: string;
-}
+import INumberInterface from '../../interfaces/INumberInterface';
+import { PencilSquare, Trash } from 'react-bootstrap-icons';
 
 interface NumberRowProps {
-  number: Number;
+  number: INumberInterface;
+  onDelete: (id: number) => void;
+  onEdit: (item: INumberInterface) => void;
 }
 
-const NumberRow: React.FC<NumberRowProps> = ({ number }) => {
+export default function NumberRow(props: NumberRowProps) {
   return (
     <tr>
-      <td>{number.id}</td>
-      <td>{number.value}</td>
-      <td>{number.monthlyPrice}</td>
-      <td>{number.setupPrice}</td>
-      <td>{number.currency}</td>
+      <td>{props.number.id}</td>
+      <td>{props.number.value}</td>
+      <td>{props.number.monthlyPrice}</td>
+      <td>{props.number.setupPrice}</td>
+      <td>{props.number.currency}</td>
+      <td>
+          <div className='flex items-center'>
+            <PencilSquare className="me-2 cursor-pointer" title='Edit' onClick={() => props.onEdit(props.number)}/>
+            <Trash className="cursor-pointer" title='Delete' onClick={() => props.onDelete(props.number.id)}/>
+          </div>
+      </td>
     </tr>
   );
 };
-
-export default NumberRow;

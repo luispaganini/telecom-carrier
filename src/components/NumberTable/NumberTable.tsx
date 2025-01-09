@@ -1,41 +1,62 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchNumbers } from '../../redux/actions/numberActions';
+import { useState } from 'react';
+import Table from 'react-bootstrap/Table';
+import LoadingComponent from '../Loading/LoadingComponent';
 import NumberRow from './NumberRow';
-import { useAppSelector } from '../../redux/hooks/useAppSelector';
-import { AppDispatch } from '../../redux/store';
+import NoContentComponent from '../NoContent/NoContentComponent';
+import INumberInterface from '../../interfaces/INumberInterface';
+import EditNumberModalComponent from '../Modals/EditNumberModalComponent';
 
-const NumberTable: React.FC = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const { numbers, isLoading, error } = useAppSelector((state) => state.numbers);
+type NumberTableProps = {
+    numbers: INumberInterface[];
+    isLoading: boolean;
+    error: string | null;
+    updateNumber: (item: INumberInterface) => void;
+    deleteNumber: (id: number) => void;
+}
 
-  useEffect(() => {
-    dispatch(fetchNumbers());
-  }, [dispatch]);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+export default function NumberTable(props: NumberTableProps) {
+    const [editModalOpen, setEditModalOpen] = useState(false)
+    const [selectedNumber, setSelectedNumber] = useState<INumberInterface | null>(null)
 
-  return (
-    <div className="table-responsive">
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Phone Number</th>
-            <th>Monthly Price</th>
-            <th>Setup Price</th>
-            <th>Currency</th>
-          </tr>
-        </thead>
-        <tbody>
-          {numbers.map((number) => (
-            <NumberRow key={number.id} number={number} />
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+    if (props.isLoading)
+        return <LoadingComponent classname='d-flex justify-content-center mt-5' />;
+
+    if (props.error)
+        return <NoContentComponent message={props.error} classname='d-flex justify-content-center mt-5' />;
+
+    const updateNumberModal = (e: INumberInterface) => {
+        setSelectedNumber(e)
+        setEditModalOpen(true)
+    }
+
+    return (
+        <div>
+            {editModalOpen && selectedNumber &&
+                <EditNumberModalComponent
+                    show={editModalOpen}
+                    handleClose={() => setEditModalOpen(false)}
+                    number={selectedNumber}
+                    updateNumber={props.updateNumber}
+                />
+            }
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Phone Number</th>
+                        <th>Monthly Price</th>
+                        <th>Setup Price</th>
+                        <th>Currency</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.numbers.map((number) => (
+                        <NumberRow key={number.id} number={number} onDelete={props.deleteNumber} onEdit={updateNumberModal} />
+                    ))}
+                </tbody>
+            </Table>
+        </div>
+    );
 };
-
-export default NumberTable;

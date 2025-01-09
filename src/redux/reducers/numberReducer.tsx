@@ -1,15 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface Number {
-  id: number;
-  value: string;
-  monthlyPrice: string;
-  setupPrice: string;
-  currency: string;
-}
+import INumberInterface from '../../interfaces/INumberInterface';
 
 interface NumberState {
-  numbers: Number[];
+  numbers: INumberInterface[];
   isLoading: boolean;
   error: string | null;
 }
@@ -27,7 +20,7 @@ const numberSlice = createSlice({
     fetchNumbersStart(state) {
       state.isLoading = true;
     },
-    fetchNumbersSuccess(state, action: PayloadAction<Number[]>) {
+    fetchNumbersSuccess(state, action: PayloadAction<INumberInterface[]>) {
       state.numbers = action.payload;
       state.isLoading = false;
     },
