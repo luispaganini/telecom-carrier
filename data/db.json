@@ -9,7 +9,7 @@
     },
     {
       "id": "18",
-      "value": "+291 125 302 9327",
+      "value": "+29 125 302 9327",
       "monthlyPrice": "86",
       "setupPrice": "22",
       "currency": "ERN"
@@ -62,13 +62,6 @@
       "monthlyPrice": "89",
       "setupPrice": "45",
       "currency": "EUR"
-    },
-    {
-      "id": "28",
-      "value": "+81 909 631 2639",
-      "monthlyPrice": "43",
-      "setupPrice": "19",
-      "currency": "JPY"
     },
     {
       "id": "29",

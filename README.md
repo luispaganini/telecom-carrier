@@ -1,46 +1,54 @@
-# Getting Started with Create React App
+# Telecom Carrier Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a web application for managing phone numbers for sale. The front-end application is built using React and uses `json-server` to simulate an API for interacting with the data.
 
-## Available Scripts
+## About project
 
-In the project directory, you can run:
+This project was created to demonstrate front-end skills at a 3C+. While the layout may not be highly complex, the core functionalities are fully operational, showcasing proficiency in handling key features and interactions effectively.
 
-### `yarn start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **React** for the front-end
+- **json-server** for the simulated API
+- **Yarn** as the package manager
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Prerequisites
 
-### `yarn test`
+Before you begin, make sure you have the following tools installed:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Node.js](https://nodejs.org/) (LTS version recommended)
+- [Yarn](https://yarnpkg.com/) (package manager)
 
-### `yarn build`
+If you don't have Yarn installed, you can install it using the following command:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install -g yarn
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Steps to Run the Project
+1. Clone the Repository
+First, clone the repository to your local environment:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone <REPOSITORY_URL>
+cd telecom-carrier
+```
 
-### `yarn eject`
+## Install dependencies by Yarn
+```bash
+yarn install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Start project with npm or yarn
+```bash
+npm start
+```
+OR
+```bash
+yarn start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Run the jest tests
+```bash
+npm test
+```
