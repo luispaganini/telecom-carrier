@@ -5,7 +5,7 @@ type NoContentComponentProps = {
 
 export default function NoContentComponent(props: NoContentComponentProps) {
   return (
-    <div>
+    <div className="alert alert-danger">
         <p>{props.message ? props.message : "Data not found"}</p>
     </div>
   )

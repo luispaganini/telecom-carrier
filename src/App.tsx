@@ -1,7 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import NumberTable from './components/NumberTable/NumberTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/HomePage';
 

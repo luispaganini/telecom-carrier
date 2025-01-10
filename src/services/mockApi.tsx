@@ -1,38 +1,55 @@
+import axios from "axios";
 import INumberInterface from "../interfaces/INumberInterface";
+import NumberPaginationTypes from "./types/numberPaginationTypes";
 
-const mockNumbers: INumberInterface[] = [
-    { id: 1, value: '+55 84 91234-4321', monthlyPrice: '0.03', setupPrice: '3.40', currency: 'U$' },
-    { id: 2, value: '+55 11 98765-1234', monthlyPrice: '0.05', setupPrice: '4.20', currency: 'U$' },
-];
+const API_URL = "http://localhost:3001/items"; // We should save this URL in a .env file
 
-const simulateDelay = <T extends unknown>(data: T): Promise<T> => {
-    return new Promise((resolve) => setTimeout(() => resolve(data), 2000));
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+export const getNumbers = async (
+  page: number = 1,
+  limit: number = 10
+): Promise<{ data: INumberInterface[]; total: number, pages: number }> => {
+  const { data: allData } = await axios.get<NumberPaginationTypes>(API_URL, { params: { _page: page, _per_page: limit } });
+
+  await delay(2000);
+
+  return { data: allData.data, total: allData.items, pages: allData.pages };
 };
 
-export const getNumbers = async (): Promise<INumberInterface[]> => {
-    const numbers = JSON.parse(localStorage.getItem('numbers') || '[]') as INumberInterface[];
-    return simulateDelay(numbers.length ? numbers : mockNumbers);
+const getStoredNumbers = async (): Promise<INumberInterface[]> => {
+  const response = await axios.get(API_URL);
+  return response.data;
 };
 
-export const addNumber = async (newNumber: INumberInterface): Promise<INumberInterface[]> => {
-    const numbers = JSON.parse(localStorage.getItem('numbers') || '[]') as INumberInterface[];
-    const updatedNumbers = [...numbers, newNumber];
-    localStorage.setItem('numbers', JSON.stringify(updatedNumbers));
-    return simulateDelay(updatedNumbers);
+const getNextId = async (): Promise<number> => {
+  const numbers = await getStoredNumbers();
+  const maxId = numbers.length ? Math.max(...numbers.map((num) => Number(num.id))) : 0;
+  return maxId + 1;
 };
 
-export const updateNumber = async (updatedNumber: INumberInterface): Promise<INumberInterface[]> => {
-    const numbers = JSON.parse(localStorage.getItem('numbers') || '[]') as INumberInterface[];
-    const updatedNumbers = numbers.map((num) =>
-        num.id === updatedNumber.id ? updatedNumber : num
-    );
-    localStorage.setItem('numbers', JSON.stringify(updatedNumbers));
-    return simulateDelay(updatedNumbers);
+export const addNumber = async (
+  newNumber: Omit<INumberInterface, "id">
+) => {
+  const nextId = await getNextId();
+
+  await axios.post<INumberInterface>(API_URL, { ...newNumber, id: nextId.toString() });
+  await delay(2000);
 };
 
-export const deleteNumber = async (id: number): Promise<INumberInterface[]> => {
-    const numbers = JSON.parse(localStorage.getItem('numbers') || '[]') as INumberInterface[];
-    const updatedNumbers = numbers.filter((num) => num.id !== id);
-    localStorage.setItem('numbers', JSON.stringify(updatedNumbers));
-    return simulateDelay(updatedNumbers);
+export const deleteNumber = async (id: number): Promise<void> => {
+  await axios.delete(`${API_URL}/${id}`);
+  await delay(2000);
+};
+
+export const updateNumber = async (
+  updatedNumber: INumberInterface
+): Promise<INumberInterface> => {
+  const { data } = await axios.put<INumberInterface>(
+    `${API_URL}/${updatedNumber.id}`,
+    updatedNumber
+  );
+  await delay(2000);
+
+  return data;
 };

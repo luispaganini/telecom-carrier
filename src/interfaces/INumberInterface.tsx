@@ -1,5 +1,5 @@
 export default interface INumberInterface {
-    id: number;
+    id: number | string;
     value: string;
     monthlyPrice: string;
     setupPrice: string;

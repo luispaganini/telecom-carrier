@@ -4,7 +4,7 @@ import LoadingComponent from '../Loading/LoadingComponent';
 import NumberRow from './NumberRow';
 import NoContentComponent from '../NoContent/NoContentComponent';
 import INumberInterface from '../../interfaces/INumberInterface';
-import EditNumberModalComponent from '../Modals/EditNumberModalComponent';
+import EditNumberModalComponent from '../Modals/NumberModalComponent';
 
 type NumberTableProps = {
     numbers: INumberInterface[];
@@ -40,23 +40,25 @@ export default function NumberTable(props: NumberTableProps) {
                     updateNumber={props.updateNumber}
                 />
             }
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Phone Number</th>
-                        <th>Monthly Price</th>
-                        <th>Setup Price</th>
-                        <th>Currency</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.numbers.map((number) => (
-                        <NumberRow key={number.id} number={number} onDelete={props.deleteNumber} onEdit={updateNumberModal} />
-                    ))}
-                </tbody>
-            </Table>
+            <div className="overflow-x-auto">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th className="px-4 py-2 border-b">#</th>
+                            <th className="px-4 py-2 border-b">Phone Number</th>
+                            <th className="px-4 py-2 border-b">Monthly Price</th>
+                            <th className="px-4 py-2 border-b">Setup Price</th>
+                            <th className="px-4 py-2 border-b">Currency</th>
+                            <th className="px-4 py-2 border-b">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.numbers.map((number) => (
+                            <NumberRow key={Number(number.id)} number={number} onDelete={props.deleteNumber} onEdit={updateNumberModal} />
+                        ))}
+                    </tbody>
+                </Table>
+            </div>
         </div>
     );
 };

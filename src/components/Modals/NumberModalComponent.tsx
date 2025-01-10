@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import INumberInterface from "../../interfaces/INumberInterface";
 
-type EditNumberModalComponentProps = {
+type NumberModalComponentProps = {
   show: boolean;
   handleClose: () => void;
   number: INumberInterface;
   updateNumber: (item: INumberInterface) => void;
 };
 
-export default function EditNumberModalComponent(props: EditNumberModalComponentProps) {
+export default function NumberModalComponent(props: NumberModalComponentProps) {
   const [formData, setFormData] = useState<INumberInterface>(props.number);
 
   useEffect(() => {
@@ -33,12 +33,12 @@ export default function EditNumberModalComponent(props: EditNumberModalComponent
   return (
     <Modal show={props.show} onHide={props.handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Number</Modal.Title>
+        <Modal.Title>Number</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formNumberValue">
-            <Form.Label>Number Value</Form.Label>
+            <Form.Label>Phone Number</Form.Label>
             <Form.Control
               type="text"
               name="value"
