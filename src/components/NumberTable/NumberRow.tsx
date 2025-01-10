@@ -17,7 +17,7 @@ export default function NumberRow(props: NumberRowProps) {
       <td className="px-4 py-2 border-b">{props.number.currency}</td>
       <td className="px-4 py-2 border-b">
         <div className='flex items-center'>
-          <PencilSquare className="mr-2 cursor-pointer" title='Edit' onClick={() => props.onEdit(props.number)} />
+          <PencilSquare className="mr-2 cursor-pointer" title='Edit' onClick={() => props.onEdit(props.number)} datatest-id="edit-icon" />
           <Trash className="cursor-pointer" title='Delete' onClick={() => props.onDelete(Number(props.number.id))} />
         </div>
       </td>

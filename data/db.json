@@ -24,7 +24,7 @@
     {
       "id": "21",
       "value": "+58 322 704 8060",
-      "monthlyPrice": "27",
+      "monthlyPrice": "0",
       "setupPrice": "23",
       "currency": "VEF"
     },
@@ -62,13 +62,6 @@
       "monthlyPrice": "89",
       "setupPrice": "45",
       "currency": "EUR"
-    },
-    {
-      "id": "27",
-      "value": "+58 483 470 4866",
-      "monthlyPrice": "60",
-      "setupPrice": "53",
-      "currency": "VEF"
     },
     {
       "id": "28",
@@ -5487,13 +5480,6 @@
       "monthlyPrice": "05",
       "setupPrice": "05",
       "currency": "USD"
-    },
-    {
-      "id": "802",
-      "value": "3213",
-      "monthlyPrice": "123",
-      "setupPrice": "123",
-      "currency": "U$"
     }
   ]
 }

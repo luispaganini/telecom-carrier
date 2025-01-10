@@ -18,38 +18,38 @@ export const fetchNumbers =
     dispatch(fetchNumbersStart());
     try {
       const { data, total, pages } = await getNumbers(page, limit);
-      console.log(data)
+
       dispatch(fetchNumbersSuccess({ data, total, pages }));
     } catch (error) {
       dispatch(fetchNumbersFailure(error instanceof Error ? error.message : "An unknown error occurred"));
     }
   };
 
-export const addNumber = (newNumber: INumberInterface) => async (dispatch: AppDispatch) => {
+export const addNumber = (newNumber: INumberInterface, currentPage: number, limit: number) => async (dispatch: AppDispatch) => {
   dispatch(fetchNumbersStart());
   try {
     await addNumberApi(newNumber);
-    dispatch(fetchNumbers());
+    dispatch(fetchNumbers(currentPage, limit));
   } catch (error) {
     dispatch(fetchNumbersFailure(error instanceof Error ? error.message : "An unknown error occurred"));
   }
 };
 
-export const updateNumber = (updatedNumber: INumberInterface) => async (dispatch: AppDispatch) => {
+export const updateNumber = (updatedNumber: INumberInterface, currentPage: number, limit: number) => async (dispatch: AppDispatch) => {
   dispatch(fetchNumbersStart());
   try {
     await updateNumberApi(updatedNumber);
-    dispatch(fetchNumbers());
+    dispatch(fetchNumbers(currentPage, limit));
   } catch (error) {
     dispatch(fetchNumbersFailure(error instanceof Error ? error.message : "An unknown error occurred"));
   }
 };
 
-export const deleteNumber = (id: number) => async (dispatch: AppDispatch) => {
+export const deleteNumber = (id: number, currentPage: number, limit: number) => async (dispatch: AppDispatch) => {
   dispatch(fetchNumbersStart());
   try {
     await deleteNumberApi(id);
-    dispatch(fetchNumbers());
+    dispatch(fetchNumbers(currentPage, limit));
   } catch (error) {
     dispatch(fetchNumbersFailure(error instanceof Error ? error.message : "An unknown error occurred"));
   }

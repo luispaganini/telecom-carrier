@@ -7,7 +7,7 @@ export default function NavbarComponent() {
         <Container>
           <Navbar.Brand href="#home">
             <div className='flex items-center'>
-              <TelephoneForwardFill className="mr-2" />
+              <TelephoneForwardFill className="mr-2" data-testid="telephone-forward-fill"/>
               <span className='text-base font-semibold'>Telecom Carrier</span>
             </div>
           </Navbar.Brand>
